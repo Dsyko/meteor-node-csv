@@ -39,7 +39,7 @@ var exportCSV = function(responseStream){
 	var fut = new Future();
 	var users = {};
 
-	//Here is where this Package is used to convert a stream from an array to a string of CSVs.
+	//Here this Package is used to parse a stream from an array to a string of CSVs.
    CSV().from(userStream)
 	.to(responseStream)
 	.transform(function(user, index){
@@ -62,8 +62,8 @@ var exportCSV = function(responseStream){
 
 	users = Users.find({})
 
-    //Pushing each user into the stream, If we could access the MongoDB driver we could convert the Cursor
-    //into a stream directly, making this a lot cleaner.
+    //Pushing each user into the stream, If we could access the MongoDB driver we could
+    //convert the Cursor into a stream directly, making this a lot cleaner.
     users.forEach(function (user) {
         userStream.write(user); //Stream transform takes care of cleanup and formatting.
         count += 1;
