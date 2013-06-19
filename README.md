@@ -3,13 +3,35 @@ meteor-node-csv
 
 [node-csv npm](http://www.adaltas.com/projects/node-csv/) wrapped for meteor
 
-Usefull for parsing CSV files to and from javascript arrays/objects.
+Once this package is added using 'mrt add node-csv-npm' It will be available in your meteor app at 'CSV'
+
+Adding this mrt package is equivalent to:
+
+installing the node package
+```
+npm install csv
+```
+
+and including it in your project as CSV
+```javascript
+var CSV = require('csv');
+```
+
+This is useful for parsing CSV files to and from javascript arrays/objects.
 
 A future is necessary for this streaming to work correctly. See: [Here](https://gist.github.com/possibilities/3443021)
 
 Here is an example of using it to parse a User collection to a csv file.
 
 ```javascript
+
+//Using the Router package to create a route, passing the response stream to our function
+Meteor.Router.add('/exportUsers/:filename', function() {
+	// curl http://localhost:3000/exportUsers/Users.csv
+	// Should get a .csv file
+	return exportCSV(this.response);
+});
+
 var exportCSV = function(responseStream){
 
    var userStream = createStream();
@@ -82,12 +104,5 @@ var createStream = function(){
 
 	return myStream;
 };
-
-//Using the Router package to create a route, passing the response stream to our function.
-Meteor.Router.add('/exportUsers/:filename', function() {
-	// curl http://localhost:3000/exportUsers/Users.csv
-	// Should get a .csv file
-	return exportCSV(this.response);
-});
 
 ```
