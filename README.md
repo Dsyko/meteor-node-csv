@@ -17,11 +17,10 @@ var exportCSV = function(responseStream){
 	var fut = new Future();
 	var users = {};
 
-	//Here is where this Package is used to convert a stream from an array to a string of comma separated values.
+	//Here is where this Package is used to convert a stream from an array to a string of CSVs.
    CSV().from(userStream)
 	.to(responseStream)
 	.transform(function(user, index){
-	//console.log("user: ", user);
 	if(user._id){
 	    var dateCreated = new Date(user.createdAt);
 	    return [user.profile.name, user.emails[0].address, dateCreated.toString()];
@@ -32,7 +31,6 @@ var exportCSV = function(responseStream){
 		log.error('Error streaming CSV export: ', error.message);
 	})
 	.on('end', function(count){
-		log.verbose('finished csv export');
 		responseStream.end();
 		fut.ret();
 	});
@@ -42,7 +40,8 @@ var exportCSV = function(responseStream){
 
 	users = Users.find({})
 
-    //Manually pushing each user into the stream, If we could access the MongoDB driver we could convert the Cursor into a stream directly, making this a lot cleaner.
+    //Pushing each user into the stream, If we could access the MongoDB driver we could convert the Cursor
+    //into a stream directly, making this a lot cleaner.
     users.forEach(function (user) {
         userStream.write(user); //Stream transform takes care of cleanup and formatting.
         count += 1;
@@ -54,6 +53,7 @@ var exportCSV = function(responseStream){
 };
 
 //Creates and returns a Duplex(Read/Write) Node stream
+//Used to pipe users from .find() Cursor into our CSV stream parser.
 var createStream = function(){
 	var stream = Npm.require('stream');
 	var myStream = new stream.Stream();
@@ -82,5 +82,12 @@ var createStream = function(){
 
 	return myStream;
 };
+
+//Using the Router package to create a route, passing the response stream to our function.
+Meteor.Router.add('/exportUsers/:filename', function() {
+	// curl http://localhost:3000/exportUsers/Users.csv
+	// Should get a .csv file
+	return exportCSV(this.response);
+});
 
 ```
