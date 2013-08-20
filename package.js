@@ -12,4 +12,4 @@ Package.on_use(function (api) {
 	}
 
 });
-Npm.depends({'csv':"0.3.3"});
+Npm.depends({'csv':"0.3.6"});
