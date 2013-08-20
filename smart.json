@@ -3,7 +3,7 @@
 	"description": "node-csv packaged for meteor 0.6.2+",
 	"homepage": "https://github.com/Dsyko/meteor-node-csv",
 	"author": "David Sykora",
-	"version": "0.3.3",
+	"version": "0.3.6",
 	"git": "https://github.com/Dsyko/meteor-node-csv.git",
 	"packages": {
 	}
