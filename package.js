@@ -2,7 +2,7 @@ Package.describe({
 	summary: "node-csv npm packaged for meteor.",
 	version: "0.3.6",
 	git: "https://github.com/Dsyko/meteor-node-csv.git",
-        name: "dsyko:meteor-node-csv"
+	name: "dsyko:meteor-node-csv"
 });
 
 Package.on_use(function (api) {
