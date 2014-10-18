@@ -3,7 +3,7 @@ meteor-node-csv
 
 [node-csv npm](http://www.adaltas.com/projects/node-csv/) wrapped for meteor
 
-Once this package is added using 'mrt add node-csv-npm' It will be available in your meteor app at 'CSV'
+Add like so: `meteor add dsyko:meteor-node-csv`. This package exports the global `CSV`.
 
 Adding this mrt package is equivalent to:
 
@@ -50,11 +50,11 @@ var exportCSV = function(responseStream){
 	    return user;
 	})
 	.on('error', function(error){
-		log.error('Error streaming CSV export: ', error.message);
+		console.error('Error streaming CSV export: ', error.message);
 	})
 	.on('end', function(count){
 		responseStream.end();
-		fut.ret();
+		fut.return();
 	});
 
 	//Write table headings for CSV to stream.
