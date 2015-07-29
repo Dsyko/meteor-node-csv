@@ -3,9 +3,9 @@ meteor-node-csv
 
 [node-csv npm](http://www.adaltas.com/projects/node-csv/) wrapped for meteor
 
-Add like so: `meteor add dsyko:meteor-node-csv`. This package exports the global `CSV`.
+Add like so: `meteor add dsyko:node-csv-npm`. This package exports the global `CSV`.
 
-Adding this mrt package is equivalent to:
+Adding this meteor package is equivalent to:
 
 installing the node package
 ```
